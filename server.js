@@ -13,7 +13,6 @@ client.on('error', err => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('.'));
 
 app.get('/test', (request, response) => response.send('Hello world.'));
 app.get('*', (request,response) => response.send('404'));
