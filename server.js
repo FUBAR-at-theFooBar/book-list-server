@@ -17,6 +17,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 app.get('/test', (request, response) => response.send('Hello world.'));
-app.get('*', (req, res) => res.redirect(CLIENT_URL));
+app.get('*', (req, res) => res.send('404'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
