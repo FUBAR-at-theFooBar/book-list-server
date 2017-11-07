@@ -13,7 +13,10 @@ client.connect();
 client.on('error', err => console.error(err));
 app.use(cors());
 
-app.get('/', (request, response) => response.sendFile('index.html', {root: CLIENT_URL}));
+app.get('/', (request, response) => {
+  console.log(CLIENT_URL);
+  response.sendFile('index.html', {root: CLIENT_URL})
+});
 
 app.get('/test', (request, response) => response.send('Hello world.'));
 app.get('/*', (req, res) => res.send('404'));
