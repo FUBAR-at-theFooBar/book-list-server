@@ -23,6 +23,7 @@ app.get('/api/v1/books', (request, response) => {
   client.query(`
     SELECT book_id, title, author, image_url FROM books;`
   )
+  console.send('test');
   .then(result => response.send(result.rows))
   .catch(console.error);
 });

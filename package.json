@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/FUBAR-at-theFooBar/book-list-server#readme",
   "dependencies": {
-    "express": "^4.16.2",
     "body-parser": "^1.15.2",
-    "pg": "^6.1.2",
-    "cors": "^2.8.4"
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "pg": "^6.1.2"
   }
 }
