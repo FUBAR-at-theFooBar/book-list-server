@@ -38,7 +38,7 @@ app.get('/api/v1/books/:id', (request, response) => {
   client.query(`
     SELECT book_id, title, author, image_url, isbn FROM books
     WHERE book_id = $1`,
-    [request.body.id]
+    [request.params.id]
   )
     .then(results => response.send(results.rows))
     .catch(console.error);
