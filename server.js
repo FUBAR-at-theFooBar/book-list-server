@@ -39,23 +39,24 @@ app.get('/api/v1/books/:id', (request, response) => {
     SELECT book_id, title, author, image_url, isbn FROM books
     WHERE book_id = $1`,
     [request.params.id]
+    // or WHERE book_id = ${request.params.id}
   )
     .then(results => response.send(results.rows))
     .catch(console.error);
 });
 //
 //
-app.post('api/v1/books'), (request, response) => {
+app.post('api/v1/books', bodyParser, (request, response) => {
+  let {title, author, isbn, image_url, description} = request.body;
+
   client.query(`
     INSERT INTO books(title, author, image_url, isbn, description)
     VALUES($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING`,
-    [request.body.title, request.body.author, request.body.image_url, request.body.isbn, request.body.description],
-    function(err) {
-      if(err) console.error(err);
-    }
+    [title, author, image_url, isbn, description]
   )
-    .then(response.send('finished posting new book'))
-};
+    .then( () => response.sendStatus(201))
+    .catch(console.error);
+});
 
 app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
