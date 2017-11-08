@@ -19,8 +19,6 @@ client.on('error', err => console.error(err));
 app.use(cors());
 
 // api endpoints
-app.get('/*', (req, res) => res.redirect(CLIENT_URL));
-
 // When the client (view) makes an Ajax call to /api/v1/books, returns all results except for the description.
 app.get('/api/v1/books', (request, response) => {
   client.query(`
@@ -29,5 +27,7 @@ app.get('/api/v1/books', (request, response) => {
   .then(results => response.send(results.rows))
   .catch(console.error);
 });
+
+app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
