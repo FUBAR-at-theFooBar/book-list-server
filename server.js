@@ -39,6 +39,7 @@ loadDB();
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
 
 function loadBooks() {
+  console.log('loadBooks');
   client.query('SELECT COUNT(*) FROM books')
     .then(result => {
       if(!parseInt(result.rows[0].count)) {
@@ -59,6 +60,7 @@ function loadBooks() {
 }
 
 function loadDB() {
+  console.log('loadDB');
   client.query(`
     CREATE TABLE IF NOT EXISTS
     books (
