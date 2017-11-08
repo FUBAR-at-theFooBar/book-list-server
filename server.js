@@ -19,15 +19,14 @@ client.on('error', err => console.error(err));
 app.use(cors());
 
 // api endpoints
-app.get('/', (req, res) => res.redirect(CLIENT_URL));
-app.get('/*', (req, res) => res.send('404'));
+app.get('*', (req, res) => res.redirect(CLIENT_URL));
 
 // When the client (view) makes an Ajax call to /api/v1/books, returns all results except for the description.
 app.get('/api/v1/books', (request, response) => {
   client.query(`
     SELECT book_id, title, author, image_url, isbn FROM books;`
   )
-  .then(results -> res.send(results.rows))
+  .then(results => res.send(results.rows))
   .catch(console.error);
 });
 
