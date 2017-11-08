@@ -1,11 +1,13 @@
 'use strict';
 
+console.log('iteration 3 loaded');
 // app dependencies
 const express = require('express');
 const pg = require('pg');
 const cors = require('cors');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+
 
 // app setup
 const app = express();
@@ -36,13 +38,13 @@ app.get('/api/v1/books/:id', (request, response) => {
   client.query(`
     SELECT book_id, title, author, image_url, isbn FROM books
     WHERE book_id = $1`,
-    [request.body.book_id]
+    [request.params.id]
   )
     .then(results => response.send(results.rows))
     .catch(console.error);
 });
-
-
+//
+//
 app.post('api/v1/books'), (request, response) => {
   client.query(`
     INSERT INTO books(title, author, image_url, isbn, description)
@@ -52,7 +54,8 @@ app.post('api/v1/books'), (request, response) => {
       if(err) console.error(err);
     }
   )
-}
+    .then(response.send('finished posting new book'))
+};
 
 app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
