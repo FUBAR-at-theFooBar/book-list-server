@@ -1,5 +1,6 @@
 'use strict';
 
+console.log('iteration 2 loaded');
 // app dependencies
 const express = require('express');
 const pg = require('pg');
@@ -33,15 +34,15 @@ app.get('/api/v1/books', (request, response) => {
     .catch(console.error);
 });
 
-// app.get('/api/v1/books/:id', (request, response) => {
-//   client.query(`
-//     SELECT book_id, title, author, image_url, isbn FROM books
-//     WHERE book_id = $1`,
-//     [request.body.book_id]
-//   )
-//     .then(results => response.send(results.rows))
-//     .catch(console.error);
-// });
+app.get('/api/v1/books/:id', (request, response) => {
+  client.query(`
+    SELECT book_id, title, author, image_url, isbn FROM books
+    WHERE book_id = $1`,
+    [request.body.book_id]
+  )
+    .then(results => response.send(results.rows))
+    .catch(console.error);
+});
 //
 //
 app.post('api/v1/books'), (request, response) => {
