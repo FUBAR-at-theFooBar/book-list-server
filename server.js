@@ -46,6 +46,7 @@ app.get('/api/v1/books/:id', (request, response) => {
 //
 //
 app.post('/api/v1/books', bodyParser, (request, response) => {
+  console.log(request.body);
   let {title, author, isbn, image_url, description} = request.body;
 
   client.query(`
