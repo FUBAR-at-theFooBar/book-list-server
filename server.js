@@ -6,7 +6,7 @@ const express = require('express');
 const pg = require('pg');
 const cors = require('cors');
 const fs = require('fs');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser').urlencoded({extended: true});
 
 // app setup
 const app = express();
@@ -20,8 +20,8 @@ client.on('error', err => console.error(err));
 
 // middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
 
 // api endpoints
 // When the client (view) makes an Ajax call to /api/v1/books, returns all results except for the description.
