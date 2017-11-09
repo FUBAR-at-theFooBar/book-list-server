@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // When the client (view) makes an Ajax call to /api/v1/books, returns all results except for the description.
 app.get('/api/v1/books', (request, response) => {
   client.query(`
-    SELECT book_id, title, author, image_url, isbn FROM books;`
+    SELECT * FROM books;`
   )
     .then(results => response.send(results.rows))
     .catch(console.error);
