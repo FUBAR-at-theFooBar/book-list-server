@@ -73,6 +73,16 @@ app.put('/api/v1/books/:id/update', bodyParser, (request, response) =>{
     .catch(console.error);
 });
 
+app.delete('/api/v1/books/:id/delete', (request, response) => {
+  client.query(`
+    DELETE FROM books
+    WHERE book_id = $1`,
+    [request.params.id]
+  )
+    .then( () => response.send('deleted'))
+    .catch(console.error);
+});
+
 app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
 // loadDB();
