@@ -64,21 +64,27 @@ app.put('/api/v1/books/:id/update', bodyParser, (request, response) =>{
   console.log(request.body);
   client.query(`
     UPDATE books
-    SET (title, author, image_url, isbn, description)
-    VALUES($1, $2, $3, $4, $5)
-    WHERE book_id = $6`,
+    SET title=$1, author=$2, image_url=$3, isbn=$4, description=$5
+    WHERE book_id = $6
+    `,
     [title, author, image_url, isbn, description, book_id]
   )
     .then( () => response.sendStatus(201))
     .catch(console.error);
 });
-// UPDATE, SET - data you're updating has to match the data type of the columns in the table schema
-//     • If no WHERE clause, updates will happen to all rows of the table
-//
-//     UPDATE mytable
-//     SET column = value_or_expr,
-//     other_column = another_value_or_expr
-// WHERE condition
+
+app.put('/articles/:id', (request, response) => {
+  client.query(`
+    UPDATE authors
+    SET author=$1, "authorUrl"=$2
+    WHERE author_id=$3
+    `,
+    [request.body.author, request.body.authorUrl, request.body.author_id]
+  )
+  .then
+
+
+
 app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
 // loadDB();
