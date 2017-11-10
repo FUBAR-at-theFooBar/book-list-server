@@ -58,7 +58,7 @@ app.post('/api/v1/books', bodyParser, (request, response) => {
     .catch(console.error);
 });
 
-app.put('/api/v1/books/:id', bodyParser, (request, response) =>{
+app.put('/api/v1/books/:id/update', bodyParser, (request, response) =>{
   console.log('put through');
   let {title, author, image_url, isbn, description} = request.body;
 
