@@ -73,18 +73,6 @@ app.put('/api/v1/books/:id/update', bodyParser, (request, response) =>{
     .catch(console.error);
 });
 
-app.put('/articles/:id', (request, response) => {
-  client.query(`
-    UPDATE authors
-    SET author=$1, "authorUrl"=$2
-    WHERE author_id=$3
-    `,
-    [request.body.author, request.body.authorUrl, request.body.author_id]
-  )
-  .then
-
-
-
 app.get('/*', (req, res) => res.redirect(CLIENT_URL));
 
 // loadDB();
