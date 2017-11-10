@@ -26,7 +26,6 @@ app.use(cors());
 // api endpoints
 // When the client (view) makes an Ajax call to /api/v1/books, returns all results except for the description.
 app.get('/api/v1/books', (request, response) => {
-  console.log('server get');
   client.query(`
     SELECT * FROM books;`
   )
