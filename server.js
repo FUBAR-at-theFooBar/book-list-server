@@ -60,13 +60,14 @@ app.post('/api/v1/books', bodyParser, (request, response) => {
 
 app.put('/api/v1/books/:id/update', bodyParser, (request, response) =>{
   console.log('put through');
-  let {title, author, image_url, isbn, description} = request.body;
-
+  let {title, author, image_url, isbn, description, book_id} = request.body;
+  console.log(request.body);
   client.query(`
     UPDATE books
     SET (title, author, image_url, isbn, description)
-    VALUES($1, $2, $3, $4, $5)`,
-    [title, author, image_url, isbn, description]
+    VALUES($1, $2, $3, $4, $5)
+    WHERE book_id = $6`,
+    [title, author, image_url, isbn, description, book_id]
   )
     .then( () => response.sendStatus(201))
     .catch(console.error);
